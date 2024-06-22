@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import LoraConfig, AutoPeftModelForCausalLM
 from trl import SFTTrainer, SFTConfig
 from train.load_ft1_ds import load_finetune_1
-
+from jsonargparse import CLI
 
 model_id = "epfl-llm/meditron-7b"
 
@@ -103,4 +103,4 @@ def train(checkpoint_dir: str):
 
 
 if __name__ == "__main__":
-    train("checkpoints")
+    CLI(train)
