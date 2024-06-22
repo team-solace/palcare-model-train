@@ -5,6 +5,7 @@ from peft import LoraConfig, AutoPeftModelForCausalLM
 from trl import SFTTrainer, SFTConfig
 from train.load_ft1_ds import load_finetune_1
 from jsonargparse import CLI
+from unsloth import FastLanguageModel
 
 model_id = "epfl-llm/meditron-7b"
 
@@ -50,8 +51,7 @@ def train(checkpoint_dir: str):
     args = SFTConfig(
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
-        per_device_train_batch_size=512,  # batch size per device during training
-        gradient_accumulation_steps=2,  # number of steps before performing a backward/update pass
+        per_device_train_batch_size=128,  # batch size per device during training
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
         optim="adamw_torch_fused",  # use fused adamw optimizer
         logging_steps=10,  # log every 10 steps
@@ -82,7 +82,8 @@ def train(checkpoint_dir: str):
         dataset_kwargs={
             "add_special_tokens": False,  # We template with special tokens
             "append_concat_token": False,  # No need to add additional separator token
-        }
+        },
+        deepspeed="deepspeed_config.json"  # use deepspeed for training
     )
 
     print("Starting Training")
