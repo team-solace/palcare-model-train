@@ -15,7 +15,7 @@ class ChatMessage(TypedDict):
 
 
 class FormattedDatasetRow(TypedDict):
-    messages: List[ChatMessage, ChatMessage, ChatMessage]
+    messages: List[ChatMessage]
 
 
 def process(dataset_row) -> FormattedDatasetRow:
