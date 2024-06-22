@@ -1,0 +1,3 @@
+datasets~=2.20.0
+pandas~=2.2.2
+jsonargparse~=4.29.0
