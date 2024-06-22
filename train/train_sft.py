@@ -63,7 +63,9 @@ def train(checkpoint_dir: str):
         lr_scheduler_type="constant",  # use constant learning rate scheduler
         push_to_hub=True,  # push model to hub
         report_to="wandb",  # report metrics to wandb
-        weight_decay=0
+        weight_decay=0,
+        dataset_text_field="messages"
+        
     )
 
     max_seq_length = 2048  # max sequence length for model and packing of the dataset
