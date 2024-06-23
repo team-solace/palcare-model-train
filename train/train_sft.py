@@ -5,7 +5,7 @@ from peft import LoraConfig, AutoPeftModelForCausalLM
 from trl import SFTTrainer, SFTConfig
 from train.load_ft1_ds import load_finetune_1
 from jsonargparse import CLI
-from unsloth import FastLanguageModel
+# from unsloth import FastLanguageModel
 
 model_id = "epfl-llm/meditron-7b"
 
@@ -82,8 +82,7 @@ def train(checkpoint_dir: str):
         dataset_kwargs={
             "add_special_tokens": False,  # We template with special tokens
             "append_concat_token": False,  # No need to add additional separator token
-        },
-        deepspeed="deepspeed_config.json"  # use deepspeed for training
+        }
     )
 
     print("Starting Training")
