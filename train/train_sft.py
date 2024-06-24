@@ -16,11 +16,14 @@ def train(checkpoint_dir: str):
     print("Loading Dataset")
     train_ds, val_ds = load_finetune_1()
 
+    device_index = Accelerator().process_index
+    device_map = {"": device_index}
+
     # Load Model
     print("Loading Model")
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        device_map="auto",
+        device_map=device_map,
         attn_implementation="flash_attention_2",
         torch_dtype=torch.bfloat16
     )
@@ -95,13 +98,10 @@ def train(checkpoint_dir: str):
     # save model
     trainer.save_model()
 
-    device_index = Accelerator().process_index
-    device_map = {"": device_index}
-
     # Load Model with PEFT adapter
     final_model = AutoPeftModelForCausalLM.from_pretrained(
         peft_output_dir,
-        device_map=device_map,
+        device_map="auto",
         torch_dtype=torch.bfloat16
     )
 
