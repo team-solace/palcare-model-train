@@ -31,6 +31,7 @@ def train(checkpoint_dir: str):
     # Load Tokenizer
     print("Loading Tokenizer")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
+    tokenizer.padding_side = 'right'
 
     # Instruct-Format Dataset
     print("Instruct Formatting Dataset")
@@ -55,7 +56,7 @@ def train(checkpoint_dir: str):
     args = SFTConfig(
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
-        per_device_train_batch_size=1,  # batch size per device during training
+        per_device_train_batch_size=128,  # batch size per device during training
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
         optim="adamw_torch_fused",  # use fused adamw optimizer
         logging_steps=10,  # log every 10 steps
