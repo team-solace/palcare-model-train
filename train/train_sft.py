@@ -23,7 +23,7 @@ def train(checkpoint_dir: str):
     print("Loading Model")
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        device_map=device_map,
+        # device_map=device_map,
         attn_implementation="flash_attention_2",
         torch_dtype=torch.bfloat16
     )
