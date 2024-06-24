@@ -1,3 +1,4 @@
+from accelerate import Accelerator
 from datasets import Dataset
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -64,7 +65,8 @@ def train(checkpoint_dir: str):
         push_to_hub=True,  # push model to hub
         report_to="wandb",  # report metrics to wandb
         weight_decay=0,
-        dataset_text_field="messages"
+        dataset_text_field="messages",
+        ddp_timeout=3600
     )
 
     max_seq_length = 2048  # max sequence length for model and packing of the dataset
@@ -93,10 +95,13 @@ def train(checkpoint_dir: str):
     # save model
     trainer.save_model()
 
+    device_index = Accelerator().process_index
+    device_map = {"": device_index}
+
     # Load Model with PEFT adapter
     final_model = AutoPeftModelForCausalLM.from_pretrained(
         peft_output_dir,
-        device_map="auto",
+        device_map=device_map,
         torch_dtype=torch.bfloat16
     )
 
