@@ -1,7 +1,7 @@
 compute_environment: LOCAL_MACHINE
 debug: false
 deepspeed_config:
-  gradient_accumulation_steps: 'auto'
+  gradient_accumulation_steps: 1
   gradient_clipping: 'auto'
   deepspeed_multinode_launcher: standard
   offload_optimizer_device: cpu
