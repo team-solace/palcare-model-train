@@ -1,1 +1,1 @@
-accelerate launch --config_file "deepspeed/deepspeed_1.yaml" train_sft.py
+accelerate launch --config_file "palcare-model-train/train/configs/deepspeed/deepspeed_1.yaml" palcare-model-train/train/train_sft.py
