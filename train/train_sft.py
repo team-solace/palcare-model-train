@@ -59,7 +59,7 @@ def train(checkpoint_dir: str):
         hub_token=os.environ['HF_WRITE_TOKEN'],  # push to hub token
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
-        per_device_train_batch_size=8,  # batch size per device during training
+        per_device_train_batch_size=2,  # batch size per device during training
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
         optim="adamw_torch",  # use ##fused adamw optimizer
         logging_steps=10,  # log every 10 steps
