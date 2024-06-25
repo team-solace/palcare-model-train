@@ -97,7 +97,7 @@ def train(checkpoint_dir: str):
             "add_special_tokens": False,  # We template with special tokens
             "append_concat_token": False,  # No need to add additional separator token
         },
-        run_name="meditron-7b-medalign_1million"
+        run_name="meditron-7b-medalign_debug"
     )
 
     print("Starting Training")
