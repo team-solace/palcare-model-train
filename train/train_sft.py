@@ -59,8 +59,8 @@ def train(checkpoint_dir: str):
         hub_token=os.environ['HF_WRITE_TOKEN'],  # push to hub token
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
-        per_device_train_batch_size=8,  # batch size per device during training
-        per_device_eval_batch_size=8,  # batch size per device during training
+        per_device_train_batch_size=6,  # batch size per device during training
+        per_device_eval_batch_size=6,  # batch size per device during training
         eval_accumulation_steps=1,  # number of eval steps to accumulate before evaluation
         adam_beta1=0.9,  # beta1 for adam optimizer
         adam_beta2=0.95,  # beta1 for adam optimizer
