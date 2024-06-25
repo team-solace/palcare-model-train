@@ -61,7 +61,7 @@ def train(checkpoint_dir: str):
         num_train_epochs=5,  # number of training epochs
         per_device_train_batch_size=128,  # batch size per device during training
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
-        optim="adam",  # use fused adamw optimizer
+        optim="adamw_torch",  # use ##fused adamw optimizer
         logging_steps=10,  # log every 10 steps
         save_strategy="epoch",  # save checkpoint every epoch
         learning_rate=2e-4,  # learning rate, based on QLoRA paper
