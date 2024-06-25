@@ -10,8 +10,8 @@ from train.load_ft1_ds import process
 CPU_COUNT = os.cpu_count()
 
 
-def process_row(batch: Dict[str, List[Dict[str, str]]], tokenizer: PreTrainedTokenizer) -> Dict[str, int]:
-    return {"count": sum([len(tokenizer(text)['input_ids']) for text in batch])}
+def process_row(batch: Dict[str, List[Dict[str, str]]], tokenizer: PreTrainedTokenizer) -> Dict[str, List[int]]:
+    return {"count": [len(tokenizer(text)['input_ids']) for text in batch]}
 
 
 def count_dataset(dataset_repo_id: str, tokenizer_repo_id: str):
