@@ -5,7 +5,7 @@ import pandas as pd
 from datasets import Dataset, load_dataset
 from transformers import AutoTokenizer, PreTrainedTokenizer
 from jsonargparse import CLI
-
+from train.load_ft1_ds import process
 
 CPU_COUNT = os.cpu_count()
 
@@ -19,8 +19,12 @@ def count_dataset(dataset_repo_id: str, tokenizer_repo_id: str):
     tokenizer: PreTrainedTokenizer = AutoTokenizer.from_pretrained(tokenizer_repo_id)
     tokenizer.padding_side = 'right'
 
-    print("Applying Chat Template...")
+    print("Loading Dataset...")
     train_ds: Dataset = load_dataset(dataset_repo_id, split="train")
+
+    print("Applying Chat Template...")
+
+    train_ds = train_ds.map(process)
     train_ds = train_ds.map(lambda x: {
         "messages": tokenizer.apply_chat_template(x["messages"], tokenize=False, add_generation_prompt=False)
     }, num_proc=CPU_COUNT)
