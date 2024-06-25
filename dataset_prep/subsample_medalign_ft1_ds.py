@@ -1,7 +1,7 @@
 from datasets import load_dataset, Dataset
 
 
-def load_finetune_1():
+def load_finetune_1(hf_write_token: str):
     train_ds: Dataset = load_dataset("lemousehunter/med-instruct-align-1_parquet")['train']
     assert train_ds.column_names == ["input", "output", "system"]
 
@@ -14,4 +14,4 @@ def load_finetune_1():
 
 
 if __name__ == "__main__":
-    load_finetune_1()
+    CLI(load_finetune_1)
