@@ -65,7 +65,7 @@ def train(checkpoint_dir: str):
         adam_beta1=0.9,  # beta1 for adam optimizer
         adam_beta2=0.95,  # beta1 for adam optimizer
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
-        optim="lion",  # use ##fused adamw optimizer
+        optim="adamw_torch",  # use ##fused adamw optimizer
         logging_steps=10,  # log every 10 steps
         save_strategy="epoch",  # save checkpoint every epoch
         learning_rate=2e-4,  # learning rate, based on QLoRA paper
