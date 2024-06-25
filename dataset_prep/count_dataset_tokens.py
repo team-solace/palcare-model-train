@@ -30,8 +30,11 @@ def count_dataset(dataset_repo_id: str, tokenizer_repo_id: str):
     }, num_proc=CPU_COUNT)
 
     print("Counting tokens...")
+
+    to_remove = list(train_ds.column_names)
+
     count_ds: Dataset = train_ds.map(lambda batch: process_row(batch, tokenizer), batched=True, batch_size=8,
-                                     num_proc=CPU_COUNT)
+                                     num_proc=CPU_COUNT, remove_columns=to_remove)
 
     print("Processing Total...")
     count_df: pd.DataFrame = count_ds.to_pandas()
