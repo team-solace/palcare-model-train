@@ -80,7 +80,7 @@ def train(checkpoint_dir: str):
         ddp_timeout=3600,
         do_eval=True,
         run_name="meditron-7b-medalign_debug",
-        evaluation_strategy="steps",
+        eval_strategy="epoch",
     )
 
     max_seq_length = 4096  # max sequence length for model and packing of the dataset
