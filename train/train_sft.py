@@ -73,7 +73,7 @@ def train(checkpoint_dir: str):
         ddp_timeout=3600
     )
 
-    max_seq_length = 2048  # max sequence length for model and packing of the dataset
+    max_seq_length = 4096  # max sequence length for model and packing of the dataset
 
     print("Loading SFT Trainer")
     trainer = SFTTrainer(

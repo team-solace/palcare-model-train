@@ -1,0 +1,1 @@
+accelerate launch --config_file "deepspeed/deepspeed_1.yaml" train_sft.py
