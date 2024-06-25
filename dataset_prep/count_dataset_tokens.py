@@ -24,7 +24,7 @@ def count_dataset(dataset_repo_id: str, tokenizer_repo_id: str):
 
     print("Applying Chat Template...")
 
-    train_ds = train_ds.map(process)
+    train_ds = train_ds.map(process, num_proc=CPU_COUNT)
     train_ds = train_ds.map(lambda x: {
         "messages": tokenizer.apply_chat_template(x["messages"], tokenize=False, add_generation_prompt=False)
     }, num_proc=CPU_COUNT)
