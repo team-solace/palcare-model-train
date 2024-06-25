@@ -10,8 +10,8 @@ def load_finetune_1(hf_write_token: str):
     train_1_ds = split['train']
     train_2_ds = split['test']
 
-    train_1_ds.push_to_hub("lemousehunter/med-instruct-align-1_train_293K")
-    train_2_ds.push_to_hub("lemousehunter/med-instruct-align-1_train_7.6M")
+    train_1_ds.push_to_hub("lemousehunter/med-instruct-align-1_train_293K", token=hf_write_token)
+    train_2_ds.push_to_hub("lemousehunter/med-instruct-align-1_train_7.6M", token=hf_write_token)
 
 
 if __name__ == "__main__":
