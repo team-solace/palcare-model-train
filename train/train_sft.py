@@ -60,6 +60,10 @@ def train(checkpoint_dir: str):
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
         per_device_train_batch_size=2,  # batch size per device during training
+        per_device_eval_batch_size=2,  # batch size per device during training
+        eval_accumulation_steps=1,  # number of eval steps to accumulate before evaluation
+        adam_beta1=0.9,  # beta1 for adam optimizer
+        adam_beta2=0.95,  # beta1 for adam optimizer
         gradient_checkpointing=True,  # use gradient checkpointing to save memory
         optim="adamw_torch",  # use ##fused adamw optimizer
         logging_steps=10,  # log every 10 steps
@@ -73,7 +77,8 @@ def train(checkpoint_dir: str):
         report_to="wandb",  # report metrics to wandb
         weight_decay=0,
         dataset_text_field="messages",
-        ddp_timeout=3600
+        ddp_timeout=3600,
+        do_eval=True,
     )
 
     max_seq_length = 4096  # max sequence length for model and packing of the dataset
@@ -91,7 +96,8 @@ def train(checkpoint_dir: str):
         dataset_kwargs={
             "add_special_tokens": False,  # We template with special tokens
             "append_concat_token": False,  # No need to add additional separator token
-        }
+        },
+        run_name="meditron-7b-medalign_1million"
     )
 
     print("Starting Training")
