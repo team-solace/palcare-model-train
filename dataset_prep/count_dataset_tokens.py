@@ -14,13 +14,13 @@ def process_row(batch: Dict[str, List[Dict[str, str]]], tokenizer: PreTrainedTok
     return {"count": sum([len(tokenizer(text)['input_ids']) for text in batch])}
 
 
-def count_dataset(repo_id: str):
+def count_dataset(dataset_repo_id: str, tokenizer_repo_id: str):
     print("Loading Tokenizer...")
-    tokenizer:PreTrainedTokenizer = AutoTokenizer.from_pretrained(repo_id)
+    tokenizer: PreTrainedTokenizer = AutoTokenizer.from_pretrained(tokenizer_repo_id)
     tokenizer.padding_side = 'right'
 
     print("Applying Chat Template...")
-    train_ds: Dataset = load_dataset("lemousehunter/med-instruct-align-1_parquet", split="train")
+    train_ds: Dataset = load_dataset(dataset_repo_id, split="train")
     train_ds = train_ds.map(lambda x: {
         "messages": tokenizer.apply_chat_template(x["messages"], tokenize=False, add_generation_prompt=False)
     }, num_proc=CPU_COUNT)
