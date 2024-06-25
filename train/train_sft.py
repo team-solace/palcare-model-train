@@ -1,3 +1,5 @@
+import os
+
 from accelerate import Accelerator
 from datasets import Dataset
 import torch
@@ -54,6 +56,7 @@ def train(checkpoint_dir: str):
     print("Loading SFT Config")
     peft_output_dir = f"{checkpoint_dir}/lemousehunter/meditron-7b-medalign"
     args = SFTConfig(
+        push_to_hub_token=os.environ['HF_WRITE_TOKEN'],  # push to hub token
         output_dir=peft_output_dir,  # directory to save and repository id
         num_train_epochs=5,  # number of training epochs
         per_device_train_batch_size=128,  # batch size per device during training
