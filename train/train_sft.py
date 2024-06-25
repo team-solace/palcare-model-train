@@ -79,6 +79,7 @@ def train(checkpoint_dir: str):
         dataset_text_field="messages",
         ddp_timeout=3600,
         do_eval=True,
+        run_name="meditron-7b-medalign_debug"
     )
 
     max_seq_length = 4096  # max sequence length for model and packing of the dataset
@@ -96,8 +97,7 @@ def train(checkpoint_dir: str):
         dataset_kwargs={
             "add_special_tokens": False,  # We template with special tokens
             "append_concat_token": False,  # No need to add additional separator token
-        },
-        run_name="meditron-7b-medalign_debug"
+        }
     )
 
     print("Starting Training")
