@@ -39,7 +39,7 @@ def load_datasets(train_ratio=0.9, seed: int = 7777):
     print("Combining Datasets")
 
     datasets = [wizardlm_evol, orca_slim_dedup, natural_instructions, alpaca, medmcqa, med_calc]
-    train_ds_list = [ds['train'] for ds in datasets]
+    train_ds_list = [ds['trl_train'] for ds in datasets]
     test_ds_list = [ds['test'] for ds in datasets]
 
     print("Shuffling Datasets")
@@ -54,7 +54,7 @@ def load_datasets(train_ratio=0.9, seed: int = 7777):
     cleaned_test = remove_columns(shuffled_test)
 
     cleaned = {
-        "train": cleaned_train,
+        "trl_train": cleaned_train,
         "test": cleaned_test
     }
 

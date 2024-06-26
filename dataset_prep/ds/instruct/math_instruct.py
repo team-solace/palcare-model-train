@@ -9,7 +9,7 @@ def process(dataset_row):
 
 
 def process_dataset(train_ratio: int = 0.9, seed: int = 42) -> DatasetDict:
-    ds: Dataset = load_dataset("TIGER-Lab/MathInstruct", split="train")
+    ds: Dataset = load_dataset("TIGER-Lab/MathInstruct", split="trl_train")
 
     ds = ds.rename_columns({"instruction": "input"})
 

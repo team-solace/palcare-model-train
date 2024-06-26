@@ -16,7 +16,7 @@ def process(dataset_row) -> FormattedFinetuneData:
 
 
 def process_dataset(train_ratio: float = 0.9, seed: int = 42) -> DatasetDict:
-    train: Dataset = load_dataset("ncbi/MedCalc-Bench", split="train")
+    train: Dataset = load_dataset("ncbi/MedCalc-Bench", split="trl_train")
     test: Dataset = load_dataset("ncbi/MedCalc-Bench", split="test")
 
     ds: Dataset = concatenate_datasets([train, test])

@@ -26,7 +26,7 @@ def process(dataset_row) -> FormattedFinetuneData:
 
 
 def process_dataset(train_ratio: float = 0.9, seed: int = 42) -> DatasetDict:
-    ds: Dataset = load_dataset("Open-Orca/SlimOrca-Dedup", split="train")
+    ds: Dataset = load_dataset("Open-Orca/SlimOrca-Dedup", split="trl_train")
 
     ds = ds.map(process)
 

@@ -3,7 +3,7 @@ from typing import TypedDict
 
 
 def process_dataset(train_ratio: float = 0.9, seed: int = 42) -> DatasetDict:
-    ds: Dataset = load_dataset("alexl83/AlpacaDataCleaned", split="train")
+    ds: Dataset = load_dataset("alexl83/AlpacaDataCleaned", split="trl_train")
 
     ds = ds.rename_columns({"instruction": "system"})
 

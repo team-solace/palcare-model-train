@@ -29,7 +29,7 @@ def process(dataset_row) -> FormattedFinetuneData:
 
 
 def process_dataset(train_ratio: float = 0.9, seed: int = 42) -> DatasetDict:
-    ds: Dataset = load_dataset("WizardLMTeam/WizardLM_evol_instruct_V2_196k", split="train")
+    ds: Dataset = load_dataset("WizardLMTeam/WizardLM_evol_instruct_V2_196k", split="trl_train")
 
     ds = ds.map(process)
 

@@ -6,7 +6,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import LoraConfig, AutoPeftModelForCausalLM
 from trl import SFTTrainer, SFTConfig
-from train.load_ft1_ds import load_finetune_1
+from trl_train.load_ft1_ds import load_finetune_1
 from jsonargparse import CLI
 # from unsloth import FastLanguageModel
 

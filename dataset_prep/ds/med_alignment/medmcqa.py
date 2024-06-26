@@ -37,7 +37,7 @@ def process(dataset_row) -> FormattedFinetuneData:
 
 
 def process_dataset(train_ratio: float = 0.9, seed: int = 42) -> DatasetDict:
-    train: Dataset = load_dataset("openlifescienceai/medmcqa", split="train")
+    train: Dataset = load_dataset("openlifescienceai/medmcqa", split="trl_train")
     val: Dataset = load_dataset("openlifescienceai/medmcqa", split="validation")
     # test: Dataset = load_dataset("openlifescienceai/medmcqa", split="test")
 

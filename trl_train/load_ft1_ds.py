@@ -28,7 +28,7 @@ def process(dataset_row) -> FormattedDatasetRow:
 
 
 def load_finetune_1() -> (Dataset, Dataset):
-    train_ds: Dataset = load_dataset("lemousehunter/med-instruct-align-1_parquet")['train']
+    train_ds: Dataset = load_dataset("lemousehunter/med-instruct-align-1_parquet")['trl_train']
     assert train_ds.column_names == ["input", "output", "system"]
     train_ds = train_ds.map(process)
 
