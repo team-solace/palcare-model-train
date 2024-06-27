@@ -5,3 +5,4 @@ safetensors
 wandb
 tokenizers
 datasets
+bitsandbytes==0.42.0
