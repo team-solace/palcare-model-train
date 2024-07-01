@@ -6,6 +6,8 @@ source_model_dir=/home/ubuntu/source_model
 max_batch_size=512
 max_context_len=4096
 
+mkdir -p $tokenizer_dir
+
 # Check if docker command runs
 if ! [ -x "$(command -v docker)" ]; then
   # Add Docker's official GPG key:
@@ -31,7 +33,6 @@ if [ -d "tensorrtllm_backend" ]; then
 else
   echo "cloning tensorrtllm_backend"
   git clone https://github.com/triton-inference-server/tensorrtllm_backend.git
-  git clone https://github.com/NVIDIA/TensorRT-LLM.git
 
   # Update the submodules
   cd "$tensorrtllm_backend_dir"
@@ -40,6 +41,31 @@ else
   cd ../
 fi
 
+if [ -d "TensorRT-LLM" ]; then
+  echo "TensorRT-LLM exists"
+else
+  echo "cloning TensorRT-LLM"
+  git clone https://github.com/NVIDIA/TensorRT-LLM.git
+fi
+
+# Install huggingface-cli
+pip install "huggingface_hub[cli]"
+
+
+# Download models
+if [ -d "$source_model_dir" ]; then
+  echo "source_model_dir exists"
+else
+  mkdir -p "$source_model_dir"
+  huggingface-cli download lemousehunter/epflllm_meditron-7b-base --local-dir "$source_model_dir"
+fi
+
+if [ -d "$converted_model_dir" ]; then
+  echo "converted_model_dir exists"
+else
+  mkdir -p $converted_model_dir
+  huggingface-cli download lemousehunter/meditron-7b-medinstruct-aligned-trt --local-dir "$converted_model_dir"
+fi
 
 ############ Setup Model ############
 echo "copying model files"
