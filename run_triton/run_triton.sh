@@ -4,7 +4,7 @@ tokenizer_dir=/home/ubuntu/tokenizer
 converted_model_dir=/home/ubuntu/model_engine
 source_model_dir=/home/ubuntu/source_model
 max_batch_size=512
-max_context_len=4096
+max_context_len=8192
 
 mkdir -p $tokenizer_dir
 
@@ -117,6 +117,8 @@ cp -r "$converted_model_dir/." "$model_dir/tensorrt_llm/1/"
 echo "copying tokenizer"
 cp "$source_model_dir/tokenizer.model" "$tokenizer_dir"
 cp "$source_model_dir/tokenizer_config.json" "$tokenizer_dir"
+cp "$source_model_dir/special_tokens_map.json" "$tokenizer_dir"
+cp "$source_model_dir/added_tokens.json" "$tokenizer_dir/add_tokens.json"
 
 echo "configuring tokenizer"
 # Configuring preprocessing
