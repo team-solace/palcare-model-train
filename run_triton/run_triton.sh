@@ -74,7 +74,7 @@ cp -r "$PWD/tensorrtllm_backend/all_models/inflight_batcher_llm/tensorrt_llm" "$
 cp -r "$PWD/tensorrtllm_backend/all_models/inflight_batcher_llm/ensemble" "$model_dir/"
 cp -r "$PWD/tensorrtllm_backend/all_models/inflight_batcher_llm/preprocessing" "$model_dir/"
 cp -r "$PWD/tensorrtllm_backend/all_models/inflight_batcher_llm/postprocessing" "$model_dir/"
-cp -r "$converted_model_dir./*" "$model_dir/tensorrt_llm/1/"
+cp -r "$converted_model_dir/*" "$model_dir/tensorrt_llm/1/"
 
 echo "copying tokenizer"
 cp "$source_model_dir/tokenizer.model" "$tokenizer_dir"
