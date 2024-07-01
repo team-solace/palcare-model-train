@@ -41,16 +41,51 @@ else
   cd ../
 fi
 
+# Install git lfs
+if [ -x "$(command -v git-lfs)" ]; then
+  echo "git-lfs exists"
+else
+  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  sudo apt-get install git-lfs
+fi
+
 if [ -d "TensorRT-LLM" ]; then
   echo "TensorRT-LLM exists"
 else
   echo "cloning TensorRT-LLM"
+  git submodule update --init --recursive
+  git lfs install
+  git lfs pull
   git clone https://github.com/NVIDIA/TensorRT-LLM.git
 fi
 
-# Install huggingface-cli
-pip install "huggingface_hub[cli]"
+# EDIT /etc/docker/daemon.json
+# {
+#     "runtimes": {
+#         "nvidia": {
+#             "path": "nvidia-container-runtime",
+#             "runtimeArgs": []
+#         }
+#     }
+# }
 
+# Install nvidia toolkit
+# sudo apt-get install -y nvidia-container-toolkit
+
+# Run TRTLLM Docker
+# docker run --rm --runtime=nvidia --gpus all --entrypoint /bin/bash -v "$converted_weights_dir":/converted_weights -v "$source_model_dir": source_model -it nvidia/cuda:12.4.0-devel-ubuntu22.04
+
+
+# Check installation
+python3 -c "import tensorrt_llm"
+#####
+
+# Install huggingface-cli
+if [ -x "$(command -v huggingface-cli)" ]; then
+  echo "huggingface-cli exists"
+else
+  pip install "huggingface_hub[cli]"
+fi
 
 # Download models
 if [ -d "$source_model_dir" ]; then
