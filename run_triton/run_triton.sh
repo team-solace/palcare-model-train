@@ -102,6 +102,9 @@ else
   huggingface-cli download lemousehunter/meditron-7b-medinstruct-aligned-trt --local-dir "$converted_model_dir"
 fi
 
+############ Cleaning Directories ############
+rm -rf $model_dir
+
 ############ Setup Model ############
 echo "copying model files"
 mkdir -p "$model_dir"
@@ -137,5 +140,5 @@ python3 "$PWD/tensorrtllm_backend/tools/fill_template.py" --in_place \
      "$model_dir/tensorrt_llm/config.pbtxt" \
      triton_backend:tensorrt_llm,decoupled_mode:false,engine_dir:/model/tensorrt_llm/1,triton_max_batch_size:"$max_batch_size",max_beam_width:1,max_attention_window_size:$max_context_len,kv_cache_free_gpu_mem_fraction:0.95,exclude_input_in_output:true,decoding_mode:top_k_top_p,enable_kv_cache_reuse:true,batching_strategy:inflight_fused_batching,max_queue_delay_microseconds:500,batch_scheduler_policy:max_utilization,enable_trt_overlap:true,enable_chunked_context:true
 
-sudo docker run -p8000:8000 -p8001:8001 -p8002:8002 --rm -it --net host --shm-size=15g --ulimit memlock=-1 --ulimit stack=67108864 --gpus all -v "$tensorrtllm_backend_dir":/tensorrtllm_backend -v "$model_dir":/model -v "$tokenizer_dir":/tokenizer nvcr.io/nvidia/tritonserver:24.06-trtllm-python-py3 bash
+sudo docker run -p8000:8000 -p8001:8001 -p8002:8002 --rm -it --net host --shm-size=15g --ulimit memlock=-1 --ulimit stack=67108864 --gpus all -v "$tensorrtllm_backend_dir":/tensorrtllm_backend -v "$model_dir":/model -v "$tokenizer_dir":/tokenizer nvcr.io/nvidia/tritonserver:24.05-trtllm-python-py3 bash
 # nvcr.io/nvidia/tritonserver:24.06-trtllm-python-py3 bash
