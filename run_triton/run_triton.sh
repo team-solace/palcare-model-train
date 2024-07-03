@@ -3,7 +3,7 @@ model_dir=/home/ubuntu/model
 tokenizer_dir=/home/ubuntu/tokenizer
 converted_model_dir=/home/ubuntu/model_engine
 source_model_dir=/home/ubuntu/source_model
-max_batch_size=512
+max_batch_size=256
 max_context_len=8192
 
 mkdir -p $tokenizer_dir
